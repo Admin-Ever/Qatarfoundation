@@ -1,0 +1,84 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+
+        <record id="view_partner_form_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="priority">2</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="phone" position="before">
+                    <field name="custom_type"/>
+                </field>
+            </field>
+        </record>
+
+
+        <record id="helpdesk_ticket_view_form_inherit" model="ir.ui.view">
+            <field name="name">helpdesk.ticket.form.inherit</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+            <field name="arch" type="xml">
+
+                <field name="email_cc" position="after">
+                    <field name="complaint_type"/>
+                    <field name="complaint_against" domain="[('related_type','in', complaint_type)]"/>
+                    <field name="related_against" invisible="1"/>
+                    <field name="related_student" attrs="{'invisible':[('related_against','!=','student')]}"/>
+                    <field name="related_college" attrs="{'invisible':[('related_against','!=','college')]}"/>
+                    <field name="related_employee" attrs="{'invisible':[('related_against','!=','staff')]}"/>
+                    <field name="related_services" attrs="{'invisible':[('related_against','!=','service')]}"/>
+                    <field name="other_complaints" attrs="{'invisible':[('related_against','!=','other')]}"/>
+                    <field name="date_incident"/>
+                    <field name="location_incident"/>
+                    <field name="terms_and_conditions"/>
+                </field>
+
+            </field>
+        </record>
+
+
+        <!-- actions opening views on models -->
+        <!--
+        <record model="ir.actions.act_window" id="helpdesk_hbku.action_window">
+          <field name="name">helpdesk_hbku window</field>
+          <field name="res_model">helpdesk_hbku.helpdesk_hbku</field>
+          <field name="view_mode">tree,form</field>
+        </record>
+        -->
+
+        <!-- server action to the one above -->
+        <!--
+        <record model="ir.actions.server" id="helpdesk_hbku.action_server">
+          <field name="name">helpdesk_hbku server</field>
+          <field name="model_id" ref="model_helpdesk_hbku_helpdesk_hbku"/>
+          <field name="state">code</field>
+          <field name="code">
+            action = {
+              "type": "ir.actions.act_window",
+              "view_mode": "tree,form",
+              "res_model": self._name,
+            }
+          </field>
+        </record>
+        -->
+
+        <!-- Top menu item -->
+        <!--
+        <menuitem name="helpdesk_hbku" id="helpdesk_hbku.menu_root"/>
+        -->
+        <!-- menu categories -->
+        <!--
+        <menuitem name="Menu 1" id="helpdesk_hbku.menu_1" parent="helpdesk_hbku.menu_root"/>
+        <menuitem name="Menu 2" id="helpdesk_hbku.menu_2" parent="helpdesk_hbku.menu_root"/>
+        -->
+        <!-- actions -->
+        <!--
+        <menuitem name="List" id="helpdesk_hbku.menu_1_list" parent="helpdesk_hbku.menu_1"
+                  action="helpdesk_hbku.action_window"/>
+        <menuitem name="Server to list" id="helpdesk_hbku" parent="helpdesk_hbku.menu_2"
+                  action="helpdesk_hbku.action_server"/>
+        -->
+    </data>
+</odoo>

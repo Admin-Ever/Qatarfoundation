@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_helpdesk_hbku_complaint_type,helpdesk_hbku.complaint_type,model_complaint_type,,1,1,1,1
+access_helpdesk_hbku_complaint_against,helpdesk_hbku.complaint_against,model_complaint_against,,1,1,1,1
