@@ -1,0 +1,176 @@
+<odoo>
+    <data>
+
+
+        <template id="assets_frontend" inherit_id="website.assets_frontend" name="Online My Portal">
+            <xpath expr="." position="inside">
+                <script type="text/javascript"
+                        src="/helpdesk_hbku/static/src/js/website_my_portal.js"/>
+            </xpath>
+        </template>
+
+
+        <template id="ticket_submit" inherit_id="website_helpdesk_form.ticket_submit"
+                  name="Helpdesk: Submit a Ticket">
+            <xpath expr="//form/div[2]" position="after">
+                <div class="form-group row form-field o_website_form_required">
+                    <div class="col-lg-3 col-md-4 text-right">
+                        <label class="col-form-label" for="complaint_type">Complaint Type</label>
+                    </div>
+                    <div class="col-lg-7 col-md-8">
+                        <select name="complaint_type" id="complaint_type"
+                                class="form-control">
+                            <option value="">Complaint Type ...</option>
+                            <t t-foreach="complaint_type" t-as="type">
+                                <option t-att-value="type.id">
+                                    <t t-esc="type.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row form-field o_website_form_required">
+                    <div class="col-lg-3 col-md-4 text-right">
+                        <label class="col-form-label" for="complaint_against">Complaint Against</label>
+                    </div>
+                    <div class="col-lg-7 col-md-8">
+                        <select name="complaint_against" id="complaint_against"
+                                class="form-control">
+                            <option value="">Complaint Against ...</option>
+                            <t t-foreach="complaint_against" t-as="type">
+                                <option t-att-value="type.id" t-att-id="type.against">
+                                    <t t-esc="type.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row form-field o_website_form_required " style="display: none;"
+                     id="related_student">
+                    <div class="col-lg-3 col-md-4 text-right">
+                        <label class="col-form-label" for="related_student">Related Student</label>
+                    </div>
+                    <div class="col-lg-7 col-md-8">
+                        <select name="related_student"
+                                class="form-control">
+                            <option value="">Student ...</option>
+                            <t t-foreach="students" t-as="student">
+                                <option t-att-value="student.id">
+                                    <t t-esc="student.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row form-field o_website_form_required " style="display: none;"
+                     id="related_college">
+                    <div class="col-lg-3 col-md-4 text-right">
+                        <label class="col-form-label" for="related_college">Related College</label>
+                    </div>
+                    <div class="col-lg-7 col-md-8">
+                        <select name="related_college"
+                                class="form-control">
+                            <option value="">College ...</option>
+                            <t t-foreach="colleges" t-as="college">
+                                <option t-att-value="college.id">
+                                    <t t-esc="college.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row form-field o_website_form_required " style="display: none;"
+                     id="related_staff">
+                    <div class="col-lg-3 col-md-4 text-right">
+                        <label class="col-form-label" for="related_employee">Related Staff</label>
+                    </div>
+                    <div class="col-lg-7 col-md-8">
+                        <select name="related_employee"
+                                class="form-control">
+                            <option value="">Staff ...</option>
+                            <t t-foreach="employees" t-as="employee">
+                                <option t-att-value="employee.id">
+                                    <t t-esc="employee.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row form-field o_website_form_required " style="display: none;"
+                     id="related_service">
+                    <div class="col-lg-3 col-md-4 text-right">
+                        <label class="col-form-label" for="related_services">Related Services</label>
+                    </div>
+                    <div class="col-lg-7 col-md-8">
+                        <select name="related_services"
+                                class="form-control">
+                            <option value="">Services ...</option>
+                            <t t-foreach="services" t-as="service">
+                                <option t-att-value="service[0]">
+                                    <t t-esc="service[1]"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row form-field o_website_form_required " style="display: none;"
+                     id="related_other">
+                    <div class="col-lg-3 col-md-4 text-right">
+                        <label class="col-form-label" for="other_complaints">Direct Complaint</label>
+                    </div>
+                    <div class="col-lg-7 col-md-8">
+                        <select name="other_complaints"
+                                class="form-control">
+                            <option value="">Complaints...</option>
+                            <t t-foreach="others" t-as="other">
+                                <option t-att-value="other[0]">
+                                    <t t-esc="other[1]"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row form-field o_website_form_required">
+                    <div class="col-lg-3 col-md-4 text-right">
+                        <label class="col-form-label" for="name">Date of Incident</label>
+                    </div>
+                    <div class="col-lg-7 col-md-8">
+                        <input type="date" min="1900-01-01" t-att-max="datetime.date.today()" name="date_incident"
+                               class="form-control  datetimepicker-input"
+                               data-date-format="MM-DD-YYYY" placeholder="MM-DD-YYYY"/>
+
+                    </div>
+                </div>
+                <div class="form-group row form-field o_website_form_required">
+                    <div class="col-lg-3 col-md-4 text-right">
+                        <label class="col-form-label" for="name">Location of Incident</label>
+                    </div>
+                    <div class="col-lg-7 col-md-8">
+                        <input type="text" class="form-control o_website_form_input" name="location_incident"
+                               required="1"/>
+                    </div>
+                </div>
+            </xpath>
+            <xpath expr="//form/div[last()]" position="before">
+                <div class="form-group row form-field o_website_form_required ">
+                    <div class="col-lg-3 col-md-4 text-right">
+                        <label class="col-form-label" for="name">Terms And Conditions</label>
+                    </div>
+                    <div class="col-lg-7 col-md-8">
+                        <input style="display: inline;width: 20px;height:15px;" type="checkbox"
+                               class="form-control o_website_form_input" name="terms_and_conditions"
+                               required="1"/>
+                        <span>
+                            I hereby declare that I have read and accept the terms and conditions of the Student
+                            Complaint Policy and the information that I have provided in this complaint is, to the best
+                            of my knowledge, both accurate and true.
+                        </span>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>
