@@ -1,0 +1,59 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+        <record id="view_partner_form_inherit_signup" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit.signup</field>
+            <field name="model">res.partner</field>
+            <field name="priority">1</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="phone" position="before">
+                    <field name="partner_code"/>
+                </field>
+            </field>
+        </record>
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="etisalat_register_website.action_window">
+      <field name="name">etisalat_register_website window</field>
+      <field name="res_model">etisalat_register_website.etisalat_register_website</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="etisalat_register_website.action_server">
+      <field name="name">etisalat_register_website server</field>
+      <field name="model_id" ref="model_etisalat_register_website_etisalat_register_website"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="etisalat_register_website" id="etisalat_register_website.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="etisalat_register_website.menu_1" parent="etisalat_register_website.menu_root"/>
+    <menuitem name="Menu 2" id="etisalat_register_website.menu_2" parent="etisalat_register_website.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="etisalat_register_website.menu_1_list" parent="etisalat_register_website.menu_1"
+              action="etisalat_register_website.action_window"/>
+    <menuitem name="Server to list" id="etisalat_register_website" parent="etisalat_register_website.menu_2"
+              action="etisalat_register_website.action_server"/>
+    -->
+  </data>
+</odoo>
