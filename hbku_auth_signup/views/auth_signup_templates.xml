@@ -1,0 +1,69 @@
+<odoo>
+    <data>
+
+        <template id="hbku_auth_signup.fields" inherit_id="auth_signup.fields" name="Sign up Fields HBKU">
+            <xpath expr="//div[hasclass('field-login')]" position="after">
+                <div class="form-group field-partner_code">
+                    <label for="partner_code">Your ID</label>
+                    <input type="text" name="partner_code" t-att-value="partner_code" id="partner_code" class="form-control form-control-sm"
+                           autofocus="autofocus"
+                           autocapitalize="off" required="required"
+                           t-att-readonly="'readonly' if only_passwords else None"/>
+                </div>
+            </xpath>
+        </template>
+
+        <template id="hbku_auth_signup.signup" inherit_id="auth_signup.signup" name="Sign up HBKU">
+            <xpath expr="//form[hasclass('oe_signup_form')]" position="replace">
+                <div class="justify-content-center text-center" t-if="message">
+                    <p class="alert alert-success" role="status">
+                        <t t-esc="message"/>
+                    </p>
+                    <a href="/web/login" class="btn btn-primary" role="button">Back to Homepage</a>
+                </div>
+
+                <form class="oe_signup_form" role="form" method="post" t-if="not message">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                    <t t-if="token and not invalid_token">
+                        <t t-call="auth_signup.fields">
+                            <t t-set="only_passwords" t-value="1"/>
+                        </t>
+                    </t>
+
+                    <t t-if="not token">
+                        <div class="form-group field-login">
+                            <label for="login" class="col-form-label">Your Email</label>
+                            <input type="text" name="login" t-att-value="login" id="login" class="form-control"
+                                   autofocus="autofocus" required="required" autocapitalize="off"/>
+                        </div>
+                        <div class="form-group field-partner_code">
+                            <label for="partner_code">Your ID</label>
+                            <input type="text" name="partner_code" t-att-value="partner_code" id="partner_code"
+                                   class="form-control form-control-sm"
+                                   autofocus="autofocus"
+                                   autocapitalize="off" required="required"
+                                   t-att-readonly="'readonly' if only_passwords else None"/>
+                        </div>
+                    </t>
+
+                    <p class="alert alert-danger" t-if="error" role="alert">
+                        <t t-esc="error"/>
+                    </p>
+                    <input type="hidden" name="redirect" t-att-value="redirect"/>
+                    <input type="hidden" name="token" t-att-value="token"/>
+                    <div class="clearfix oe_login_buttons">
+                        <div class="d-flex justify-content-between align-items-center small">
+                            <button type="submit" class="btn btn-primary">Sign up</button>
+                            <a t-if="not token" t-attf-href="/web/login?{{ keep_query() }}">Back to Login</a>
+                            <a t-if="invalid_token" href="/web/login">Back to Login</a>
+                        </div>
+                        <div class="o_login_auth"/>
+                    </div>
+
+                </form>
+
+            </xpath>
+        </template>
+    </data>
+</odoo>
